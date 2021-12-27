@@ -55,7 +55,13 @@ export default function CoasterDrink({ drink }) {
     <div className="w-full py-2 flex justify-between px-2 divide-x-2 divide-gray-500">
       <div className="w-1/3">{displayDate}</div>
       <div className="w-2/3 pl-2 break-all font-bold">{drink.drink.title}</div>
-      {isEditable && <XIcon onClick={handleDeleteCoasterDrink} width={40} />}
+      {isEditable && (
+        <XIcon
+          onClick={handleDeleteCoasterDrink}
+          width={40}
+          className="text-red-600 cursor-pointer"
+        />
+      )}
     </div>
   );
 }

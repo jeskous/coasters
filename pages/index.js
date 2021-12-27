@@ -45,6 +45,7 @@ export default function Home({ coasters, drinks }) {
           <PencilAltIcon
             width={30}
             onClick={() => setIsEditable(!isEditable)}
+            className="cursor-pointer"
           />
         </div>
         <div id="coasterarea" className="ml-10 mr-10">

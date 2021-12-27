@@ -28,8 +28,8 @@ export default function DeleteCoasterBtn({ coaster }) {
 
   return (
     <>
-      <div className="absolute right-0 top-0 cursor-pointer">
-        <XIcon width={20} onClick={openModal} />
+      <div className="absolute right-2 top-1 text-red-600  cursor-pointer">
+        <XIcon width={30} onClick={openModal} />
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
