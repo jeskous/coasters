@@ -3,18 +3,24 @@ import { Fragment, useState } from "react";
 import { XIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useCoaster } from "../../../contexts/coasterContext";
+import Loading from "../../Loading";
 
 export default function DeleteCoasterBtn({ coaster }) {
+  const { setIsLoading, isLoading } = useCoaster();
   let [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
   const handleDeleteCoaster = async () => {
     try {
+      setIsLoading(true);
       await axios.delete(`/api/Coaster/${coaster.id}`);
       closeModal();
       router.reload();
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -75,22 +81,26 @@ export default function DeleteCoasterBtn({ coaster }) {
                   Bierdeckel wirklich löschen?
                 </Dialog.Title>
 
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                    onClick={handleDeleteCoaster}
-                  >
-                    Löschen
-                  </button>
-                  <button
-                    type="button"
-                    className="inline-flex justify-center ml-4 px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                    onClick={closeModal}
-                  >
-                    Abbrechen
-                  </button>
-                </div>
+                {isLoading ? (
+                  <Loading />
+                ) : (
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      onClick={handleDeleteCoaster}
+                    >
+                      Löschen
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex justify-center ml-4 px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      onClick={closeModal}
+                    >
+                      Abbrechen
+                    </button>
+                  </div>
+                )}
               </div>
             </Transition.Child>
           </div>

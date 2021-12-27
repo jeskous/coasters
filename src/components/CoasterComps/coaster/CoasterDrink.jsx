@@ -1,13 +1,17 @@
 import { XIcon } from "@heroicons/react/solid";
 import axios from "axios";
+import { useRouter } from "next/router";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useCoaster } from "../../../contexts/coasterContext";
+import Loading from "../../Loading";
 
 export default function CoasterDrink({ drink }) {
   const [displayDate, setDisplayDate] = useState();
-  const { isEditable } = useCoaster();
+  const { isEditable, setIsLoading, isLoading } = useCoaster();
+
+  const router = useRouter();
 
   const formatDate = () => {
     const drinkDate = new Date();
@@ -39,15 +43,21 @@ export default function CoasterDrink({ drink }) {
 
   const handleDeleteCoasterDrink = async () => {
     try {
+      setIsLoading(true);
       await axios.delete(`/api/CoasterDrink/${drink.id}`);
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsLoading(false);
+      router.reload();
     }
   };
 
   useEffect(() => {
     formatDate();
   }, []);
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="w-full py-2 flex justify-between px-2 divide-x-2 divide-gray-500">

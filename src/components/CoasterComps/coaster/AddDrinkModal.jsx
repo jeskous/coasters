@@ -83,6 +83,7 @@ export default function AddDrinkModal({ coaster }) {
                     searchQuery={query}
                     coaster={coaster}
                     closeModal={closeModal}
+                    isOpen={isOpen}
                   />
                 </div>
               </div>

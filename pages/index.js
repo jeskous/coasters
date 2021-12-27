@@ -9,19 +9,29 @@ import Header from "../src/components/Header/Header";
 import { useCoaster } from "../src/contexts/coasterContext";
 
 export default function Home({ coasters, drinks }) {
-  const { setCoasters, setDrinks, setIsEditable, isEditable } = useCoaster();
+  const {
+    setCoasters,
+    setDrinks,
+    setIsEditable,
+    isEditable,
+    setIsLoading,
+    isLoading,
+  } = useCoaster();
   const router = useRouter();
 
   //sends request to api to add new empty coaster
   const handleAddCoaster = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       await axios.post("/api/Coaster", {
         name: "",
       });
       router.reload();
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -39,7 +49,10 @@ export default function Home({ coasters, drinks }) {
       <Header />
       <div className="mt-5">
         <div id="buttonarea" className="mx-10 flex justify-between items-start">
-          <Button title="Bierdeckel Hinzufügen" onClick={handleAddCoaster} />
+          {!isLoading && (
+            <Button title="Bierdeckel Hinzufügen" onClick={handleAddCoaster} />
+          )}
+
           <PencilAltIcon
             width={30}
             onClick={() => setIsEditable(!isEditable)}

@@ -1,10 +1,18 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import React from "react";
 import { useCoaster } from "../../../contexts/coasterContext";
+import Loading from "../../Loading";
 import DrinkListItem from "./DrinkListItem";
 
-export default function DrinkList({ searchQuery, coaster, closeModal }) {
-  const { drinks } = useCoaster();
+export default function DrinkList({
+  searchQuery,
+  coaster,
+  closeModal,
+  isOpen,
+}) {
+  const { drinks, isLoading } = useCoaster();
+  const router = useRouter();
 
   const queriedDrinks = () => {
     let filteredDrinks = [];
@@ -39,6 +47,7 @@ export default function DrinkList({ searchQuery, coaster, closeModal }) {
       console.log(e);
     } finally {
       closeModal();
+      router.reload();
     }
   };
 
@@ -55,6 +64,7 @@ export default function DrinkList({ searchQuery, coaster, closeModal }) {
       </div>
     );
 
+  if (isLoading && isOpen) return <Loading />;
   return (
     <div className="max-h-60 flex mt-4 flex-col overflow-scroll">
       {renderQueriedDrinks()}
