@@ -3,9 +3,6 @@ import CoasterDrink from "./CoasterDrink";
 
 export default function CoasterDrinkList({ drinkList }) {
   const renderDrinkList = () => {
-    console.log(drinkList);
-    const reversedList = drinkList.reverse();
-    console.log(reversedList);
     return drinkList.map((drink, index) => {
       return <CoasterDrink key={index} drink={drink} />;
     });
