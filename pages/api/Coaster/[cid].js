@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     const { cid } = req.query;
     console.log(cid);
     try {
-      const test = await prisma.coaster.delete({
+      await prisma.coaster.delete({
         where: { id: parseInt(cid) },
       });
       res.send("success");

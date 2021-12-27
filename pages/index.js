@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Button from "../src/components/Button";
 import CoasterList from "../src/components/CoasterComps/CoasterList";
@@ -8,13 +9,19 @@ import { useCoaster } from "../src/contexts/coasterContext";
 
 export default function Home({ coasters }) {
   const { setCoasters } = useCoaster();
+  const router = useRouter();
 
   //sends request to api to add new empty coaster
   const handleAddCoaster = async (e) => {
     e.preventDefault();
-    const response = await axios.post("/api/Coaster", {
-      name: "",
-    });
+    try {
+      await axios.post("/api/Coaster", {
+        name: "",
+      });
+      router.reload();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {

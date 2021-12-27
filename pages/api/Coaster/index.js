@@ -16,14 +16,4 @@ export default async function handler(req, res) {
       prisma.$disconnect();
     }
   }
-  if (req.method === "DELETE") {
-    console.log("DELETE");
-    try {
-      await prisma.coaster.delete({ where: { id: req.body } });
-    } catch (e) {
-      res.status(400).send(e);
-    } finally {
-      prisma.$disconnect();
-    }
-  }
 }
