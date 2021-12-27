@@ -11,22 +11,24 @@ datasource db {
   url = env("DATABASE_URL")
 }
 
-model User {
+model Coaster {
   id    Int    @id @default(autoincrement())
   name  String
-  drinks Drink[]
+  drinks CoasterDrinks[]
 }
 
 model Drink {
   id        Int     @id @default(autoincrement())
+  date  DateTime @default(now())
   title     String
-  userId    Int
-  user      User    @relation(fields: [userId], references: [id])
+  coasters CoasterDrinks[]
 }
 
-model DrinkHistory {
-  id    Int    @id @default(autoincrement())
-  date  DateTime @default(now())
-  userName String
-  drinkName String
+model CoasterDrinks {
+  coaster Coaster  @relation(fields: [coasterId], references: [id])
+  coasterId Int
+  drink Drink  @relation(fields: [drinkId], references: [id])
+  drinkId Int
+
+   @@id([coasterId, drinkId])
 }

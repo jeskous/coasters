@@ -4,7 +4,7 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps }) {
   return (
     <ProvideCoasterContext>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </ProvideCoasterContext>
   );
 }

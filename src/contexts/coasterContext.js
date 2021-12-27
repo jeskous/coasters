@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const coasterContext = createContext();
 
@@ -12,10 +12,131 @@ export function ProvideCoasterContext({ children }) {
 }
 
 export const useCoaster = () => {
-  return useContext(teamViewContext);
+  return useContext(coasterContext);
 };
 
 //TeamView Content here
 function useProvideCoaster() {
-  return {};
+  const [coasters, setCoasters] = useState(mockData);
+  const [isLoading, setIsLoading] = useState(false);
+  return { coasters, setCoasters, isLoading, setIsLoading };
 }
+
+const mockData = [
+  {
+    name: "jesko",
+    drinks: [
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Ende",
+        date: "123",
+      },
+    ],
+  },
+  {
+    name: "jesko",
+    drinks: [
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Ende",
+        date: "123",
+      },
+    ],
+  },
+  {
+    name: "jesko",
+    drinks: [
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Ende",
+        date: "123",
+      },
+    ],
+  },
+  {
+    name: "jesko",
+    drinks: [
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Fanta Korn",
+        date: "123",
+      },
+      {
+        title: "Ende",
+        date: "123",
+      },
+    ],
+  },
+];
