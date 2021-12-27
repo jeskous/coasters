@@ -59,6 +59,9 @@ export async function getServerSideProps(context) {
     coasters = await prisma.coaster.findMany({
       include: {
         drinks: {
+          orderBy: {
+            id: "desc",
+          },
           include: {
             drink: true,
           },

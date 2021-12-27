@@ -50,7 +50,7 @@ export default function DrinkList({ searchQuery, coaster, closeModal }) {
           onClick={handleAddNewDrink}
           className="w-full h-full mt-4 mb-2 rounded-md bg-blue-300 text-xl"
         >
-          "{searchQuery}" Hinzufügen!
+          &apos;{searchQuery}&apos; Hinzufügen!
         </button>
       </div>
     );
