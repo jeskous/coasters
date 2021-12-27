@@ -19,6 +19,7 @@ export default function Home({ coasters }) {
 
   useEffect(() => {
     if (coasters) {
+      console.log(coasters);
       setCoasters(coasters);
     }
   }, [coasters, setCoasters]);
