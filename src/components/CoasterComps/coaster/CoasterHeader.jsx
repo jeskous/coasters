@@ -19,6 +19,7 @@ export default function CoasterHeader({ coaster }) {
       className="w-full h-1/6 rounded-t-lg pl-5 py-2 text-md border-b-2 border-black"
       onChange={handleChangeName}
       onBlur={handleOnBlur}
+      placeholder="Namen eingeben"
       value={name}
     />
   );
