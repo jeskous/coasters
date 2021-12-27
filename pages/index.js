@@ -12,7 +12,7 @@ export default function Home({ coasters }) {
   //sends request to api to add new empty coaster
   const handleAddCoaster = async (e) => {
     e.preventDefault();
-    await axios.post("/api/Coaster", {
+    const response = await axios.post("/api/Coaster", {
       name: "",
     });
   };
@@ -42,14 +42,19 @@ export default function Home({ coasters }) {
 //fetch coasters from database
 export async function getServerSideProps(context) {
   const prisma = new PrismaClient();
-
-  const coasters = await prisma.coaster.findMany({
-    include: { drinks: true },
-  });
-
-  prisma.$disconnect();
+  let coasters = [];
+  try {
+    coasters = await prisma.coaster.findMany({
+      include: { drinks: true },
+    });
+  } catch (e) {
+    //logger
+    console.log(e);
+  } finally {
+    prisma.$disconnect();
+  }
 
   return {
-    props: { coasters }, // will be passed to the page component as props
+    props: { coasters },
   };
 }
