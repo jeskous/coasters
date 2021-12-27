@@ -27,11 +27,9 @@ export default function Home({ coasters, drinks }) {
 
   useEffect(() => {
     if (coasters) {
-      console.log(coasters);
       setCoasters(coasters);
     }
     if (drinks) {
-      console.log(drinks);
       setDrinks(drinks);
     }
   }, [coasters, drinks, setCoasters, setDrinks]);

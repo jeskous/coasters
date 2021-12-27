@@ -13,8 +13,6 @@ export default function CoasterDrink({ drink }) {
     const drinkDate = new Date();
     const now = new Date();
 
-    console.log(drinkDate.getMonth() + 1);
-
     const currentDay = now.getDate();
     const currentMonth = now.getMonth();
 
