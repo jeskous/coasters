@@ -1,5 +1,5 @@
 import React from "react";
-import AddDrinkBtn from "./AddDrinkBtn";
+import AddDrinkModal from "./AddDrinkModal";
 import CoasterDrinkList from "./CoasterDrinkList";
 import CoasterHeader from "./CoasterHeader";
 import DeleteCoasterBtn from "./DeleteCoasterBtn";
@@ -11,7 +11,7 @@ export default function Coaster({ coaster }) {
       <CoasterHeader coaster={coaster} />
       <CoasterDrinkList drinkList={coaster.drinks} />
 
-      <AddDrinkBtn />
+      <AddDrinkModal coaster={coaster} />
     </div>
   );
 }

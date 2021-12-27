@@ -7,6 +7,36 @@ export default async function handler(req, res) {
   const { cid } = req.query;
 
   //methods
+  if (req.method === "POST") {
+    try {
+      await prisma.coasterDrinks.create({
+        data: {
+          date: new Date(),
+          coaster: {
+            connect: {
+              id: req.body.cid,
+            },
+          },
+          drink: {
+            connectOrCreate: {
+              where: {
+                id: req.body.did,
+              },
+              create: {
+                title: req.body.title,
+              },
+            },
+          },
+        },
+      });
+      res.send("success");
+    } catch (e) {
+      console.log(e);
+      res.status(400).send(e);
+    } finally {
+      prisma.$disconnect();
+    }
+  }
   if (req.method === "DELETE") {
     try {
       await prisma.coaster.delete({

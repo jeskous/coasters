@@ -7,8 +7,8 @@ import CoasterList from "../src/components/CoasterComps/CoasterList";
 import Header from "../src/components/Header/Header";
 import { useCoaster } from "../src/contexts/coasterContext";
 
-export default function Home({ coasters }) {
-  const { setCoasters } = useCoaster();
+export default function Home({ coasters, drinks }) {
+  const { setCoasters, setDrinks } = useCoaster();
   const router = useRouter();
 
   //sends request to api to add new empty coaster
@@ -29,7 +29,11 @@ export default function Home({ coasters }) {
       console.log(coasters);
       setCoasters(coasters);
     }
-  }, [coasters, setCoasters]);
+    if (drinks) {
+      console.log(drinks);
+      setDrinks(drinks);
+    }
+  }, [coasters, drinks, setCoasters, setDrinks]);
 
   return (
     <>
@@ -50,10 +54,18 @@ export default function Home({ coasters }) {
 export async function getServerSideProps(context) {
   const prisma = new PrismaClient();
   let coasters = [];
+  let drinks = [];
   try {
     coasters = await prisma.coaster.findMany({
-      include: { drinks: true },
+      include: {
+        drinks: {
+          include: {
+            drink: true,
+          },
+        },
+      },
     });
+    drinks = await prisma.drink.findMany();
   } catch (e) {
     //logger
     console.log(e);
@@ -62,6 +74,6 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: { coasters },
+    props: { coasters, drinks },
   };
 }

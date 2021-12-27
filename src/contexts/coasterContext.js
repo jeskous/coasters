@@ -18,8 +18,9 @@ export const useCoaster = () => {
 //TeamView Content here
 function useProvideCoaster() {
   const [coasters, setCoasters] = useState([]);
+  const [drinks, setDrinks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  return { coasters, setCoasters, isLoading, setIsLoading };
+  return { coasters, setCoasters, drinks, setDrinks, isLoading, setIsLoading };
 }
 
 const mockData = [

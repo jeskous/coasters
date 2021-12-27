@@ -19,16 +19,17 @@ model Coaster {
 
 model Drink {
   id        Int     @id @default(autoincrement())
-  date  DateTime @default(now())
   title     String
   coasters CoasterDrinks[]
 }
 
 model CoasterDrinks {
+  id Int @default(autoincrement())
   coaster Coaster  @relation(fields: [coasterId], references: [id])
   coasterId Int
   drink Drink  @relation(fields: [drinkId], references: [id])
   drinkId Int
+  date String
 
-   @@id([coasterId, drinkId])
+   @@id([id, coasterId, drinkId])
 }
