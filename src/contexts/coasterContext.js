@@ -20,7 +20,17 @@ function useProvideCoaster() {
   const [coasters, setCoasters] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  return { coasters, setCoasters, drinks, setDrinks, isLoading, setIsLoading };
+  const [isEditable, setIsEditable] = useState(false);
+  return {
+    coasters,
+    setCoasters,
+    drinks,
+    setDrinks,
+    isLoading,
+    setIsLoading,
+    isEditable,
+    setIsEditable,
+  };
 }
 
 const mockData = [

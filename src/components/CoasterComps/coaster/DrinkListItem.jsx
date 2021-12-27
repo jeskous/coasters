@@ -3,10 +3,8 @@ import React from "react";
 
 export default function DrinkListItem({ drink, coaster, closeModal }) {
   const handleAddDrink = async () => {
-    //make api call to add drink "drink" to current coaster
-
     try {
-      await axios.post(`/api/Coaster/${coaster.id}`, {
+      await axios.post(`/api/CoasterDrink/${coaster.id}`, {
         title: drink.title,
         cid: coaster.id,
         did: drink.id,

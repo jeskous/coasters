@@ -1,3 +1,4 @@
+import { PencilAltIcon } from "@heroicons/react/solid";
 import { PrismaClient } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -8,7 +9,7 @@ import Header from "../src/components/Header/Header";
 import { useCoaster } from "../src/contexts/coasterContext";
 
 export default function Home({ coasters, drinks }) {
-  const { setCoasters, setDrinks } = useCoaster();
+  const { setCoasters, setDrinks, setIsEditable, isEditable } = useCoaster();
   const router = useRouter();
 
   //sends request to api to add new empty coaster
@@ -39,8 +40,12 @@ export default function Home({ coasters, drinks }) {
     <>
       <Header />
       <div className="mt-5">
-        <div id="buttonarea" className="ml-10">
+        <div id="buttonarea" className="mx-10 flex justify-between items-start">
           <Button title="Bierdeckel Hinzufügen" onClick={handleAddCoaster} />
+          <PencilAltIcon
+            width={30}
+            onClick={() => setIsEditable(!isEditable)}
+          />
         </div>
         <div id="coasterarea" className="ml-10 mr-10">
           <CoasterList coasters />
